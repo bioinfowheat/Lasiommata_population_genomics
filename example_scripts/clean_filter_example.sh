@@ -85,10 +85,30 @@ cd /smb/zootis.zoologi.su.se/chrwhe/Elizabeth/Lasiommata_popgen
 mkdir cleaning_data
 cd cleaning_data
 # now lets take the files and save them as a list
-find /smb/zootis.zoologi.su.se/chrwhe/Elizabeth/Mats_genomic_data_raw -name "*.gz" > fq.files.w.path
+find ../../Mats_genomic_data_raw -name "*.gz" > fq.files.w.path
 
 # this is an example of a lop through the list
 while read p; do echo $p ; done < fq.files.w.path
 
 # make a soft link to all of them, here.
 while read p; do ln -s $p .; done < fq.files.w.path
+
+# verify you can see the files from the soft link
+zcat P25152_145_S95_L003_R1_001.fastq.gz | head
+
+# verify you can write in the folder
+touch test # write test in the folder you are in
+
+# run the cleaning script on this subset of files where their paths are indicated
+cp /data/programs/scripts/getlog_dna_gzfastq_q20_v25_8_20.py .
+
+#
+ls *gz > fq.files
+head fq.files
+# P25152_101_S51_L003_R1_001.fastq.gz
+# P25152_101_S51_L003_R2_001.fastq.gz
+# P25152_102_S52_L003_R1_001.fastq.gz
+# P25152_102_S52_L003_R2_001.fastq.gz
+# P25152_103_S53_L003_R1_001.fastq.gz
+
+python getlog_dna_gzfastq_q20_v25_8_20.py fq.files
