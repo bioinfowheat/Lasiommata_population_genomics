@@ -114,6 +114,9 @@ head fq.files
 python getlog_dna_gzfastq_q20_v25_8_20.py fq.files
 
 
+
+
+
 # now that you have fastq files cleaned, you can look at the log file output as per what RS did above,
 # which is important and you want to have that to put into a table, and assess if any individuals
 # are "bad", and how that is distributed among populations
@@ -146,6 +149,4 @@ perl /data/programs/FastQC/fastqc -o ../read_qc/clean -t 5 P25152_103_S53_L003_R
 cd ~/zootis.zoologi.su.se/Elizabeth/Lasiommata_popgen/cleaning_data
 head -6 ../read_qc/clean/fastqc_jobs.txt | parallel --dryrun -j10 {}
 
-head -6 ../read_qc/clean/fastqc_jobs.txt | parallel -j10 {} 
-
-
+head -6 ../read_qc/clean/fastqc_jobs.txt | parallel -j10 {}
