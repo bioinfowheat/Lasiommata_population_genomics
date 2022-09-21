@@ -82,7 +82,19 @@ cd /smb/zootis.zoologi.su.se/chrwhe/Elizabeth/
 du -hs *
 # out of space
 
-rm *1 *2
-parallel -j 10 'pigz {}' ::: *fq
+rm *1 *2 temp*.fq
+parallel 'pigz {}' ::: *fq
 
 tail -n 68 fq.files > fq.files.subset2
+
+# this log file was written just fine.
+mv log.txt 160_end.log.txt
+
+# modified getlog to parse only logfile
+getlog_dna_gzfastq_q20_v25_8_20.logfile_only.py
+# make this exe
+chmod u+x getlog_dna_gzfastq_q20_v25_8_20.logfile_only.py
+cp templog_firstrun.txt templog.txt
+python getlog_dna_gzfastq_q20_v25_8_20.logfile_only.py
+
+cat log.txt 160_end.log.txt > all_files.log.txt
