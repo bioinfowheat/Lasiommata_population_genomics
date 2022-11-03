@@ -16,13 +16,13 @@ multiqc .
 
   /// MultiQC 🔍 | v1.13
 
-|           multiqc | Search path : /smb/zootis.zoologi.su.se/chrwhe/Elizabeth/Lasiommata_popgen/read_qc
-|         searching | ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 13/13
-|            fastqc | Found 6 reports
-|           multiqc | Compressing plot data
-|           multiqc | Report      : multiqc_report.html
-|           multiqc | Data        : multiqc_data
-|           multiqc | MultiQC complete
+|		   multiqc | Search path : /smb/zootis.zoologi.su.se/chrwhe/Elizabeth/Lasiommata_popgen/read_qc
+|		 searching | ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 13/13
+|			fastqc | Found 6 reports
+|		   multiqc | Compressing plot data
+|		   multiqc | Report	  : multiqc_report.html
+|		   multiqc | Data		: multiqc_data
+|		   multiqc | MultiQC complete
 
 # check the output by copying the HTML to your local computer and opening it
 # I would go to my local computer, via the terminal go to my Downloads folder, then use this
