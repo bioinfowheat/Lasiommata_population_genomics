@@ -11,6 +11,9 @@ https://youtu.be/cktKbESOOno
 # just ran a subset into two separate folders
 head -6 ~/zootis.zoologi.su.se/Elizabeth/Lasiommata_popgen/read_qc/raw/fastqc_jobs_rawreads.txt | parallel {}
 head -6 ~/zootis.zoologi.su.se/Elizabeth/Lasiommata_popgen/read_qc/clean/fastqc_jobs.txt | parallel {}
+
+
+
 # go into their root folder
 cd ~/zootis.zoologi.su.se/Elizabeth/Lasiommata_popgen/read_qc
 

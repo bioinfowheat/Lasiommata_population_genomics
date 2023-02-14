@@ -1,0 +1,2 @@
+Date	FC id	Lane	Cluster(M)	Phix	≥Q30(%)	Method
+220701	AHNVFFDSX3	3	2850.45	0.27	89.32	A
