@@ -19,4 +19,7 @@ file		   clonefilter_in_pairs  clonefilter_out_pairs  clonefilter_percent_remain
 
 # now run this for all files, save it as a *.csv file, and then open it in excel to see how it looks.
 # then go back to original log file, look at some random file, and see if this information is correct,
-# that is, do a spot check by eye to make sure the parsing of the file is being done correctly. 
+# that is, do a spot check by eye to make sure the parsing of the file is being done correctly.
+
+
+# double checking some of the files based upon fastqc output.

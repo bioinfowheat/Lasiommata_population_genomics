@@ -98,3 +98,16 @@ cp templog_firstrun.txt templog.txt
 python getlog_dna_gzfastq_q20_v25_8_20.logfile_only.py
 
 cat log.txt 160_end.log.txt > all_files.log.txt
+
+
+#####
+# running new set of files cause they crashed.
+# moving log files to other names
+cat log.txt > up_to_160.log.txt
+python getlog_dna_gzfastq_q20_v25_8_20.py fq.files.subset
+# look great.
+cat log.txt > 160_end.log.txt
+
+rm P25*_1 P25*_2 temp*fq
+# compress
+parallel 'pigz {}' ::: *fq

@@ -86,21 +86,68 @@ cat lookuptable.tsv | parallel --colsep '\t' mv {1}.R2.ctq20.fq.gz {2}_R2.ctq20.
 
 
 ###################################################
-# another approach
-# goal
-P25152_101_S51_L003_R1_001.fastq.ctq20.fq.gz H1_R1.ctq20.fq.gz
-P25152_101_S51_L003_R2_001.fastq.ctq20.fq.gz H1_R2.ctq20.fq.gz
-P25152_102_S52_L003_R1_001.fastq.ctq20.fq.gz H2_R1.ctq20.fq.gz
-P25152_102_S52_L003_R2_001.fastq.ctq20.fq.gz H2_R2.ctq20.fq.gz
+	# another approach
+	# goal
+	# P25152_101_S51_L003_R1_001.fastq.ctq20.fq.gz H1_R1.ctq20.fq.gz
+	# P25152_101_S51_L003_R2_001.fastq.ctq20.fq.gz H1_R2.ctq20.fq.gz
+	# P25152_102_S52_L003_R1_001.fastq.ctq20.fq.gz H2_R1.ctq20.fq.gz
+	# P25152_102_S52_L003_R2_001.fastq.ctq20.fq.gz H2_R2.ctq20.fq.gz
+	#
+	# #
+	# /smb/zootis.zoologi.su.se/chrwhe/Elizabeth/Lasiommata_popgen/cleaning_data
+	# sed 1d ~/zootis.zoologi.su.se/Elizabeth/Lasiommata_popgen/NGI_delivery/K.Gotthard_22_01_sample_info.txt | cut -f1,2 | tr -s " " | awk '{gsub("\t",",",$0); print;}'> lookuptable.csv
+	#
+	# cat lookuptable.csv | while IFS=, read orig new; do mv "$orig" "$new"; done
 
-#
-/smb/zootis.zoologi.su.se/chrwhe/Elizabeth/Lasiommata_popgen/cleaning_data
-sed 1d ~/zootis.zoologi.su.se/Elizabeth/Lasiommata_popgen/NGI_delivery/K.Gotthard_22_01_sample_info.txt | cut -f1,2 | tr -s " " | awk '{gsub("\t",",",$0); print;}'> lookuptable.csv
+# just recleaned 160 onwards ... .
+P25152_160	S12
+P25152_161	S13
+P25152_162	S14
+P25152_163	S15
+P25152_164	S16
+P25152_165	S17
+P25152_166	S19
+P25152_167	S20
+P25152_168	S21
+P25152_169	S22
+P25152_170	S23
+P25152_171	S24
+P25152_172	V1
+P25152_173	V2
+P25152_174	V3
+P25152_175	V4
+P25152_176	V5
+P25152_177	V6
+P25152_178	V7
+P25152_179	V8
+P25152_180	V9
+P25152_181	V10
+P25152_182	V13
+P25152_183	V14
+P25152_184	V15
+P25152_185	V17
+P25152_186	V18
+P25152_187	V19
+P25152_188	V20
+P25152_189	V21
+P25152_190	V22
+P25152_191	V23
+P25152_192	V24
+P25152_193	V25
+P25152_194	V26
 
-cat lookuptable.csv | while IFS=, read orig new; do mv "$orig" "$new"; done
+for file in P*.ctq20.fq.gz ; do cp $file $(echo $file |sed 's/_001\.fastq//g' |sed 's/_S.._L003_/./g' | sed 's/_S..._L003_/./g' ); done
+mkdir clean_old_name
+mv P*001.fastq.ctq20.fq.gz clean_old_name
 
-
-
-
+# trim to only 160 to 194 files
+tail -n 35 lookuptable.tsv > 160_194_lookuptable.tsv
+# get rid of the old
+cut -f2 160_194_lookuptable.tsv | parallel rm {}_R1.ctq20.fq.gz {}_R2.ctq20.fq.gz
+# then rename these files for R1
+cat 160_194_lookuptable.tsv | parallel --colsep '\t' mv {1}.R1.ctq20.fq.gz {2}_R1.ctq20.fq.gz
+# and R2
+cat 160_194_lookuptable.tsv | parallel --colsep '\t' mv {1}.R2.ctq20.fq.gz {2}_R2.ctq20.fq.gz
+echo "finished renaming"
 
 #
