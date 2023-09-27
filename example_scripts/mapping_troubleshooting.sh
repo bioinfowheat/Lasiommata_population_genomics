@@ -100,7 +100,31 @@ rm *.H*.sam
 # compare with multiQC report
 scp chrwhe@duke.zoologi.su.se:/smb/zootis.zoologi.su.se/chrwhe/Elizabeth/Lasiommata_popgen/Mats_read_qc/\*.html .
 
+# continuing
+parallel -j 20 'samtools view -Sb -F4 {} -o {.}.bam' ::: *.R*.sam
+rm *.R*.sam
 
+# trying more complete run
+parallel -j 8 'samtools view -Sb -@4 -F4 {} | samtools sort -@4 - -o {.}.sorted.bam ; samtools index {.}.sorted.bam' ::: *.S*.sam
+# save those that have the biggest reduction
+for sam in S20 S23 S24 ;
+	do echo $sam ; done | cat | parallel "pigz Lasmeg_ilLasMege1.aln.{}.sam"
+done
+rm *.S*.sam
+
+parallel -j 8 'samtools view -Sb -@4 -F4 {} | samtools sort -@4 - -o {.}.sorted.bam ; samtools index {.}.sorted.bam' ::: *.V*.sam
+# save those that have the biggest reduction
+ls -lh *.V*.*am
+for sam in V23  ;
+	do echo $sam ; done | cat | parallel "pigz Lasmeg_ilLasMege1.aln.{}.sam"
+done
+rm *.V*.sam
+
+parallel -j 8 'samtools sort -@4 {} -o {.}.sorted.bam ; samtools index {.}.sorted.bam' ::: *.H*.bam
+ls *.H*.bam | grep -v 'sorted' | parallel rm {}
+
+parallel -j 10 'samtools sort -@4 {} -o {.}.sorted.bam ; samtools index {.}.sorted.bam' ::: *.R*.bam
+	ls *.R*.bam | grep -v 'sorted' | parallel rm {}
 
 
 # after all converted to BAM
